@@ -5,6 +5,8 @@
 
 .btn {
     margin: 5px 5px 0px 0px;
+    border-width: 2px !important;
+    font-weight: 600 !important;
 }
 
 .fade-in {

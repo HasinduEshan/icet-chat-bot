@@ -10,7 +10,7 @@ function toast() {
   i = 0;
   toastBootstrap.show();
   msg =
-    "Hello! Welcome to iCET. I'm Teci, your digital assistant. Can I please know your name?";
+    "Hi there! Welcome to iCET - Institute of Computer Engineering and Technology. I'm Teci, your digital assistant. Please can I know your name?";
   writer();
 }
 
@@ -19,7 +19,7 @@ function writer() {
   if (i < msg.length) {
     document.getElementById("msg").innerHTML += msg.charAt(i); //set msg from iCET
     i++;
-    setTimeout(writer, 80);
+    setTimeout(writer, 40);
   }
 }
 
@@ -29,6 +29,7 @@ function getAge() {
   var userName = document.getElementById("txtName").value;
   if (userName != "") {
     // You can use userName as needed (e.g., display it in another toast)
+    console.log("Name : " + document.getElementById("txtName").value);
     msg =
       "Nice to meet you " + userName + "! Could you please tell me your age?";
     const toast_body = document.getElementById("toast-body");
@@ -55,11 +56,11 @@ function getAge() {
 
     //create submit button element
     const btn_submit = document.createElement("button");
-    btn_submit.className = "btn btn-primary";
+    btn_submit.className = "btn btn-outline-primary";
     btn_submit.type = "button";
     btn_submit.innerHTML = "Next";
     btn_submit.addEventListener("click", () => {
-      console.log(document.getElementById("txtAge").value);
+      askEducation();
     });
 
     //create submit button holder div element
@@ -83,6 +84,181 @@ function getAge() {
 
     writer();
   }
+}
+
+function askEducation() {
+  i = 0;
+
+  if (document.getElementById("txtAge").value != "") {
+    console.log("Age : " + document.getElementById("txtAge").value);
+
+    msg = "What is your Highest Education Qualification?";
+    const toast_body = document.getElementById("toast-body");
+    toast_body.innerHTML = "";
+
+    //create the msg div element
+    const grt = document.createElement("div");
+    grt.className = "msg";
+    grt.id = "msg";
+
+    toast_body.appendChild(grt);
+
+    //create the input text field element
+    const txt_div = document.createElement("input");
+    txt_div.className = "form-control";
+    txt_div.id = "txtEdu";
+    txt_div.type = "text";
+    txt_div.placeholder = "Please enter your qualification";
+
+    //create input text field elemnt holder div
+    const txt_div_holder = document.createElement("div");
+    txt_div_holder.className = "d-flex justify-content-end";
+    txt_div_holder.appendChild(txt_div);
+
+    //create submit button element
+    const btn_submit = document.createElement("button");
+    btn_submit.className = "btn btn-outline-primary";
+    btn_submit.type = "button";
+    btn_submit.innerHTML = "Next";
+    btn_submit.addEventListener("click", () => {
+      askEmployability();
+    });
+
+    //create submit button holder div element
+    const btn_submit_holder = document.createElement("div");
+    btn_submit_holder.className = "d-flex justify-content-end btn-submit";
+    btn_submit_holder.appendChild(btn_submit);
+
+    //create the input elements wrapper div
+    const input_div = document.createElement("div");
+    input_div.appendChild(txt_div_holder);
+    input_div.appendChild(btn_submit_holder);
+
+    toast_body.appendChild(input_div);
+
+    //create the empty tips div element
+    const tips = document.createElement("div");
+    tips.className = "mt-2 pt-2 border-top tips";
+    tips.id = "tips";
+
+    toast_body.appendChild(tips);
+
+    writer();
+  }
+}
+
+function askEmployability() {
+  i = 0;
+  if (document.getElementById("txtEdu").value != "") {
+    console.log("Education : " + document.getElementById("txtEdu").value);
+
+    msg = "Are you currently employed?";
+    const toast_body = document.getElementById("toast-body");
+    toast_body.innerHTML = "";
+
+    //create the msg div element
+    const grt = document.createElement("div");
+    grt.className = "msg";
+    grt.id = "msg";
+
+    toast_body.appendChild(grt);
+
+    //create submit button element
+    const btn_yes = document.createElement("button");
+    btn_yes.className = "btn btn-outline-primary";
+    btn_yes.type = "button";
+    btn_yes.innerHTML = "Yes";
+    btn_yes.addEventListener("click", () => {
+      askITRelated();
+    });
+
+    const btn_no = document.createElement("button");
+    btn_no.className = "btn btn-outline-primary";
+    btn_no.type = "button";
+    btn_no.innerHTML = "No";
+    btn_no.addEventListener("click", () => {
+      courses();
+    });
+
+    //create submit button holder div element
+    const btn_submit_holder = document.createElement("div");
+    btn_submit_holder.className = "d-flex justify-content-end btn-submit";
+    btn_submit_holder.appendChild(btn_yes);
+    btn_submit_holder.appendChild(btn_no);
+
+    //create the input elements wrapper div
+    const input_div = document.createElement("div");
+    input_div.appendChild(btn_submit_holder);
+
+    toast_body.appendChild(input_div);
+
+    //create the empty tips div element
+    const tips = document.createElement("div");
+    tips.className = "mt-2 pt-2 border-top tips";
+    tips.id = "tips";
+
+    toast_body.appendChild(tips);
+
+    writer();
+  }
+}
+
+function askITRelated() {
+  i = 0;
+  console.log("Employability : yes");
+
+  msg = "Are you working in the IT Industry?";
+  const toast_body = document.getElementById("toast-body");
+  toast_body.innerHTML = "";
+
+  //create the msg div element
+  const grt = document.createElement("div");
+  grt.className = "msg";
+  grt.id = "msg";
+
+  toast_body.appendChild(grt);
+
+  //create submit button element
+  const btn_yes = document.createElement("button");
+  btn_yes.className = "btn btn-outline-primary";
+  btn_yes.type = "button";
+  btn_yes.innerHTML = "Yes";
+  btn_yes.addEventListener("click", () => {
+    courses();
+  });
+
+  const btn_no = document.createElement("button");
+  btn_no.className = "btn btn-outline-primary";
+  btn_no.type = "button";
+  btn_no.innerHTML = "No";
+  btn_no.addEventListener("click", () => {
+    courses();
+  });
+
+  //create submit button holder div element
+  const btn_submit_holder = document.createElement("div");
+  btn_submit_holder.className = "d-flex justify-content-end btn-submit";
+  btn_submit_holder.appendChild(btn_yes);
+  btn_submit_holder.appendChild(btn_no);
+
+  //create the input elements wrapper div
+  const input_div = document.createElement("div");
+  input_div.appendChild(btn_submit_holder);
+
+  toast_body.appendChild(input_div);
+
+  //create the empty tips div element
+  const tips = document.createElement("div");
+  tips.className = "mt-2 pt-2 border-top tips";
+  tips.id = "tips";
+
+  toast_body.appendChild(tips);
+
+  writer();
+}
+
+function courses() {
+  console.log("courses");
 }
 
 //set faid-in active of starting options
