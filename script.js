@@ -103,163 +103,59 @@ function askEducation() {
 
     toast_body.appendChild(grt);
 
+    //create data list
+    const list = ["Before O/L",
+                  "After O/L",
+                  "After A/L",
+                  "Diploma",
+                  "HND",
+                  "Undergraduate (Non IT)",
+                  "Undergraduate (IT)",
+                  "Degree (Non IT)",
+                  "Degree (IT)",
+                  "Msc.",
+                  "Above Msc."];
+
+    const data_list = document.createElement("datalist");
+    data_list.id = "browsers"
+    list.forEach(val => {
+      const option = document.createElement("option");
+      option.value = val; 
+      data_list.appendChild(option);
+    });
+
     //create the input text field element
-    // const txt_div = document.createElement("input");
-    // txt_div.className = "form-control";
-    // txt_div.id = "txtEdu";
-    // txt_div.type = "text";
-    // txt_div.placeholder = "Please enter your qualification";
-
-    //unorder list items
-
-    const before_ol = document.createElement("a");
-    before_ol.innerHTML = "Before O/L";
-    before_ol.className = "dropdown-item";
-    before_ol.addEventListener("click", () => {
-      askEmployability("Before O/L");
-    });
-    const before_ol_li = document.createElement("li");
-    before_ol_li.appendChild(before_ol);
-
-    const after_ol = document.createElement("a");
-    after_ol.innerHTML = "After O/L";
-    after_ol.className = "dropdown-item";
-    after_ol.addEventListener("click", () => {
-      askEmployability("After O/L");
-    });
-    const after_ol_li = document.createElement("li");
-    after_ol_li.appendChild(after_ol);
-
-    const after_al = document.createElement("a");
-    after_al.innerHTML = "After A/L";
-    after_al.className = "dropdown-item";
-    after_al.addEventListener("click", () => {
-      askEmployability("After A/L");
-    });
-    const after_al_li = document.createElement("li");
-    after_al_li.appendChild(after_al);
-
-    const dip = document.createElement("a");
-    dip.innerHTML = "Diploma";
-    dip.className = "dropdown-item";
-    dip.addEventListener("click", () => {
-      askEmployability("Diploma");
-    });
-    const dip_li = document.createElement("li");
-    dip_li.appendChild(dip);
-
-    const hnd = document.createElement("a");
-    hnd.innerHTML = "HND";
-    hnd.className = "dropdown-item";
-    hnd.addEventListener("click", () => {
-      askEmployability("HND");
-    });
-    const hnd_li = document.createElement("li");
-    hnd_li.appendChild(hnd);
-
-    const ug = document.createElement("a");
-    ug.innerHTML = "Undergraduate (Non IT)";
-    ug.className = "dropdown-item";
-    ug.addEventListener("click", () => {
-      askEmployability("Undergraduate (Non IT)");
-    });
-    const ug_li = document.createElement("li");
-    ug_li.appendChild(ug);
-
-    const ug_it = document.createElement("a");
-    ug_it.innerHTML = "Ungergraduate (IT)";
-    ug_it.className = "dropdown-item";
-    ug_it.addEventListener("click", () => {
-      askEmployability("Undergraduate (IT)");
-    });
-    const ug_it_li = document.createElement("li");
-    ug_it_li.appendChild(ug_it);
-
-    const dg = document.createElement("a");
-    dg.innerHTML = "Non IT Degree";
-    dg.className = "dropdown-item";
-    dg.addEventListener("click", () => {
-      askEmployability("Non IT Degree");
-    });
-    const dg_li = document.createElement("li");
-    dg_li.appendChild(dg);
-
-    const dg_it = document.createElement("a");
-    dg_it.innerHTML = "IT Degree";
-    dg_it.className = "dropdown-item";
-    dg_it.addEventListener("click", () => {
-      askEmployability("IT Degree");
-    });
-    const dg_it_li = document.createElement("li");
-    dg_it_li.appendChild(dg_it);
-
-    const msc = document.createElement("a");
-    msc.innerHTML = "MSc.";
-    msc.className = "dropdown-item";
-    msc.addEventListener("click", () => {
-      askEmployability("Msc.");
-    });
-    const msc_li = document.createElement("li");
-    msc_li.appendChild(msc);
-
-    const above = document.createElement("a");
-    above.innerHTML = "Above Msc.";
-    above.className = "dropdown-item";
-    above.addEventListener("click", () => {
-      askEmployability("Above Msc.");
-    });
-    const above_li = document.createElement("li");
-    above_li.appendChild(above);
-
-    const ul = document.createElement("ul");
-    ul.className = "dropdown-menu";
-    ul.appendChild(before_ol_li);
-    ul.appendChild(after_ol_li);
-    ul.appendChild(after_al_li);
-    ul.appendChild(dip_li);
-    ul.appendChild(hnd_li);
-    ul.appendChild(ug_li);
-    ul.appendChild(ug_it_li);
-    ul.appendChild(dg_li);
-    ul.appendChild(dg_it_li);
-    ul.appendChild(msc_li);
-    ul.appendChild(above_li);
-
-    const btn_drp_dwn = document.createElement("button");
-    btn_drp_dwn.className = "btn btn-secondary dropdown-toggle";
-    btn_drp_dwn.type = "button";
-    btn_drp_dwn.setAttribute("data-bs-toggle", "dropdown");
-    btn_drp_dwn.setAttribute("aria-expanded", "false");
-    btn_drp_dwn.innerHTML = "Please Select";
-
-    const drp_dwn = document.createElement("div");
-    drp_dwn.className = "dropdown";
-    drp_dwn.appendChild(btn_drp_dwn);
-    drp_dwn.appendChild(ul);
+    const txt_div = document.createElement("input");
+    txt_div.className = "form-control";
+    txt_div.id = "txtEdu";
+    txt_div.type = "text";
+    txt_div.setAttribute('list',"browsers");
+    txt_div.placeholder = "Please enter your qualification";
 
     //create input text field elemnt holder div
-    const drp_dwn_holder = document.createElement("div");
-    drp_dwn_holder.className = "d-flex justify-content-center";
-    drp_dwn_holder.appendChild(drp_dwn);
+    const txt_holder = document.createElement("div");
+    txt_holder.className = "d-flex justify-content-center";
+    txt_holder.appendChild(txt_div);
+    txt_holder.appendChild(data_list);
 
-    // //create submit button element
-    // const btn_submit = document.createElement("button");
-    // btn_submit.className = "btn btn-outline-primary";
-    // btn_submit.type = "button";
-    // btn_submit.innerHTML = "Next";
-    // btn_submit.addEventListener("click", () => {
-    //   askEmployability();
-    // });
+    //create submit button element
+    const btn_submit = document.createElement("button");
+    btn_submit.className = "btn btn-outline-primary";
+    btn_submit.type = "button";
+    btn_submit.innerHTML = "Next";
+    btn_submit.addEventListener("click", () => {
+      askEmployability(txt_div.value);
+    });
 
     //create submit button holder div element
-    // const btn_submit_holder = document.createElement("div");
-    // btn_submit_holder.className = "d-flex justify-content-end btn-submit";
-    // btn_submit_holder.appendChild(btn_submit);
+    const btn_submit_holder = document.createElement("div");
+    btn_submit_holder.className = "d-flex justify-content-end btn-submit";
+    btn_submit_holder.appendChild(btn_submit);
 
     //create the input elements wrapper div
     const input_div = document.createElement("div");
-    input_div.appendChild(drp_dwn_holder);
-    // input_div.appendChild(btn_submit_holder);
+    input_div.appendChild(txt_holder);
+    input_div.appendChild(btn_submit_holder);
 
     toast_body.appendChild(input_div);
 
