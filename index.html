@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <button type="button" name="sms" class="btn btn-primary" id="liveToastBtn" onclick="toast()">ask iCET</button>
+    <button type="button" name="sms" class="btn btn-primary" id="liveToastBtn" onclick="start()">ask iCET</button>
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
@@ -21,22 +21,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="reload()"></button>
             </div>
             <div id="toast-body" class="toast-body">
-                <div id="msg" class="msg">
+                <!-- <div id="msg" class="msg">
                 </div>
                 <div>
                     <div class="d-flex justify-content-end">
-                        <!-- <label for="nameInput" class="form-label">Please enter your name:</label> -->
-                        <input type="text" id="txtName" class="form-control" placeholder="Please enter your name">
+                        <input type="text" id="txtName" class="form-control" placeholder="Please enter your name" onclick="askAge()">
                     </div>
                     <div class="d-flex justify-content-end btn-submit">
-                        <button type="button" class="btn btn-outline-primary" onclick="getAge()">Next</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="askAge()">Next</button>
                     </div>
                 </div>
                 <div id="tips" class="mt-2 pt-2 border-top tips">
-                    <!-- <button type="button" class="btn btn-primary btn-sm fade-in">How can I Join?</button>
-                    <button type="button" class="btn btn-primary btn-sm fade-in" onclick="cmToast('Which Course are you interested in?',['ICM - iCET Certified Master','ICD - iCET Certified Developer','ICP - iCET Certified Professional'])">What are the Courses?</button>
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button> -->
-                </div>
+                    
+                </div> -->
             </div>
             
         </div>
