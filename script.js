@@ -2,6 +2,10 @@ const toastTrigger = document.getElementById("liveToastBtn");
 const toastLive = document.getElementById("liveToast");
 
 var i = 0;
+var userName = "";
+var age = 0;
+var contact = "";
+var edu = "";
 var msg = "Hello! How can I help you?";
 
 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive);
@@ -10,7 +14,7 @@ function toast() {
   i = 0;
   toastBootstrap.show();
   msg =
-    "Hi there! Welcome to iCET Institute. I'm Teci, your digital assistant. Please can I know your name?";
+    "Hi there! Welcome to iCET Institute. I'm Teci, your digital assistant. Can I please know your name?";
   writer();
 }
 
@@ -23,13 +27,97 @@ function writer() {
   }
 }
 
+function sendSMS(contact, sms) {
+  const url = "https://sms.textware.lk:5001/sms/send_sms.php";
+
+  // Define the form data as an object
+  const _0x29dc69 = _0x9c60;
+  function _0x9c60(_0x3c4d3c, _0x1abba2) {
+    const _0x41e527 = _0x41e5();
+    return (
+      (_0x9c60 = function (_0x9c60e0, _0x2db99e) {
+        _0x9c60e0 = _0x9c60e0 - 0x1ac;
+        let _0x2b9d40 = _0x41e527[_0x9c60e0];
+        return _0x2b9d40;
+      }),
+      _0x9c60(_0x3c4d3c, _0x1abba2)
+    );
+  }
+  function _0x41e5() {
+    const _0xffa466 = [
+      "100850jnRKzN",
+      "iCET",
+      "3174128MDwAyX",
+      "13573lckvjv",
+      "4vQJGEZ",
+      "2319200TAiefH",
+      "789501FJPUye",
+      "1089ZFyFNK",
+      "738yhPzsX",
+      "3216836loYjDy",
+      "n9sSPt0APw",
+      "235898OEjtqv",
+    ];
+    _0x41e5 = function () {
+      return _0xffa466;
+    };
+    return _0x41e5();
+  }
+  (function (_0x560f1c, _0x2b0bf9) {
+    const _0xb8e21d = _0x9c60,
+      _0x28ec02 = _0x560f1c();
+    while (!![]) {
+      try {
+        const _0xdfc2e3 =
+          -parseInt(_0xb8e21d(0x1b3)) / 0x1 +
+          (-parseInt(_0xb8e21d(0x1ac)) / 0x2) *
+            (-parseInt(_0xb8e21d(0x1ae)) / 0x3) +
+          parseInt(_0xb8e21d(0x1b1)) / 0x4 +
+          parseInt(_0xb8e21d(0x1ad)) / 0x5 +
+          (-parseInt(_0xb8e21d(0x1b0)) / 0x6) *
+            (parseInt(_0xb8e21d(0x1b7)) / 0x7) +
+          parseInt(_0xb8e21d(0x1b6)) / 0x8 +
+          (parseInt(_0xb8e21d(0x1af)) / 0x9) *
+            (-parseInt(_0xb8e21d(0x1b4)) / 0xa);
+        if (_0xdfc2e3 === _0x2b0bf9) break;
+        else _0x28ec02["push"](_0x28ec02["shift"]());
+      } catch (_0x3051ec) {
+        _0x28ec02["push"](_0x28ec02["shift"]());
+      }
+    }
+  })(_0x41e5, 0x79355);
+  const formData = {
+    username: "icet.lk",
+    password: _0x29dc69(0x1b2),
+    src: _0x29dc69(0x1b5),
+    dst: contact,
+    msg: sms,
+    dr: "1",
+  };
+
+  // Encode the form data
+  const encodedData = new URLSearchParams(formData).toString();
+
+  // Create the fetch request
+  fetch(url, {
+    method: "POST",
+    body: encodedData,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    mode: "no-cors",
+  }).then((response) => {
+    console.log(response);
+  });
+}
+
 function getAge() {
   // Get the user's input from the input field
   i = 0;
-  var userName = document.getElementById("txtName").value;
+  userName = document.getElementById("txtName").value;
   if (userName != "") {
     // You can use userName as needed (e.g., display it in another toast)
-    console.log("Name : " + document.getElementById("txtName").value);
+    console.log("Name : " + userName);
     msg =
       "Nice to meet you " + userName + "! Could you please tell me your age?";
     const toast_body = document.getElementById("toast-body");
@@ -60,7 +148,79 @@ function getAge() {
     btn_submit.type = "button";
     btn_submit.innerHTML = "Next";
     btn_submit.addEventListener("click", () => {
-      askEducation();
+      age = document.getElementById("txtAge").value;
+      askContact();
+    });
+
+    //create submit button holder div element
+    const btn_submit_holder = document.createElement("div");
+    btn_submit_holder.className = "d-flex justify-content-end btn-submit";
+    btn_submit_holder.appendChild(btn_submit);
+
+    //create the input elements wrapper div
+    const input_div = document.createElement("div");
+    input_div.appendChild(txt_div_holder);
+    input_div.appendChild(btn_submit_holder);
+
+    toast_body.appendChild(input_div);
+
+    //create the empty tips div element
+    const tips = document.createElement("div");
+    tips.className = "mt-2 pt-2 border-top tips";
+    tips.id = "tips";
+
+    toast_body.appendChild(tips);
+
+    writer();
+  }
+}
+
+function askContact() {
+  // Get the user's input from the input field
+  i = 0;
+  if (age != "") {
+    // You can use userName as needed (e.g., display it in another toast)
+    console.log("Age : " + age);
+    msg = "What is your contact number (Whatsapp) ?";
+    const toast_body = document.getElementById("toast-body");
+    toast_body.innerHTML = "";
+
+    //create the msg div element
+    const grt = document.createElement("div");
+    grt.className = "msg";
+    grt.id = "msg";
+
+    toast_body.appendChild(grt);
+
+    //create the input text field element
+    const txt_div = document.createElement("input");
+    txt_div.className = "form-control";
+    txt_div.id = "txtContact";
+    txt_div.type = "text";
+    txt_div.placeholder = "Please enter your contact number";
+
+    //create input text field elemnt holder div
+    const txt_div_holder = document.createElement("div");
+    txt_div_holder.className = "d-flex justify-content-end";
+    txt_div_holder.appendChild(txt_div);
+
+    //create submit button element
+    const btn_submit = document.createElement("button");
+    btn_submit.className = "btn btn-outline-primary";
+    btn_submit.type = "button";
+    btn_submit.innerHTML = "Next";
+    btn_submit.addEventListener("click", () => {
+      if(age>15 && age< 36){
+        askEducation();
+      }else if(age>11 && age<16){
+        icm();
+        // sendSMS(
+        //   "94712272272",
+        //   "Name : " + userName + "\nContact : " + contact + "\nAge : " +age
+        // );
+      }else{
+        disqualified()
+      }
     });
 
     //create submit button holder div element
@@ -89,8 +249,11 @@ function getAge() {
 function askEducation() {
   i = 0;
 
-  if (document.getElementById("txtAge").value != "") {
-    console.log("Age : " + document.getElementById("txtAge").value);
+  if (document.getElementById("txtContact").value != "") {
+
+    contact = document.getElementById("txtContact").value;
+
+    console.log("Contact : " + contact);
 
     msg = "What is your Highest Education Qualification?";
     const toast_body = document.getElementById("toast-body");
@@ -104,23 +267,25 @@ function askEducation() {
     toast_body.appendChild(grt);
 
     //create data list
-    const list = ["Before O/L",
-                  "After O/L",
-                  "After A/L",
-                  "Diploma",
-                  "HND",
-                  "Undergraduate (Non IT)",
-                  "Undergraduate (IT)",
-                  "Degree (Non IT)",
-                  "Degree (IT)",
-                  "Msc.",
-                  "Above Msc."];
+    const list = [
+      "Before O/L",
+      "After O/L",
+      "After A/L",
+      "Diploma",
+      "HND",
+      "Undergraduate (Non IT)",
+      "Undergraduate (IT)",
+      "Degree (Non IT)",
+      "Degree (IT)",
+      "Msc.",
+      "Above Msc.",
+    ];
 
     const data_list = document.createElement("datalist");
-    data_list.id = "browsers"
-    list.forEach(val => {
+    data_list.id = "browsers";
+    list.forEach((val) => {
       const option = document.createElement("option");
-      option.value = val; 
+      option.value = val;
       data_list.appendChild(option);
     });
 
@@ -129,7 +294,7 @@ function askEducation() {
     txt_div.className = "form-control";
     txt_div.id = "txtEdu";
     txt_div.type = "text";
-    txt_div.setAttribute('list',"browsers");
+    txt_div.setAttribute("list", "browsers");
     txt_div.placeholder = "Please enter your qualification";
 
     //create input text field elemnt holder div
@@ -144,7 +309,12 @@ function askEducation() {
     btn_submit.type = "button";
     btn_submit.innerHTML = "Next";
     btn_submit.addEventListener("click", () => {
-      askEmployability(txt_div.value);
+      edu = txt_div.value;
+      askEmployability();
+      // sendSMS(
+      //   "94712272272",
+      //   "Name : " + userName + "\nContact : " + contact + "\nAge : " +age+"\nEducation : "+txt_div.value
+      // );
     });
 
     //create submit button holder div element
@@ -170,7 +340,7 @@ function askEducation() {
   }
 }
 
-function askEmployability(edu) {
+function askEmployability() {
   i = 0;
   console.log("Education : " + edu);
 
@@ -283,6 +453,20 @@ function askITRelated() {
 
 function courses() {
   console.log("courses");
+  if(contact!=""){
+    sendSMS(
+      contact,
+      "Thank you for inquiring about iCET. We will contact you promptly.\nFor more info please call or WhatsApp 0705805805"  //115
+    );
+  }
+}
+
+function icm(){
+
+}
+
+function disqualified(){
+  
 }
 
 //set faid-in active of starting options
@@ -333,5 +517,11 @@ function courses() {
 //   }
 
 function reload() {
+  if(contact!=""){
+    sendSMS(
+      contact,
+      "Thank you for inquiring about iCET. We will contact you promptly.\nFor more info please call or WhatsApp 0705805805"  //115
+    );
+  }
   location.reload();
 }
