@@ -44,7 +44,7 @@ function start() {
   txt_div.required = true;
   txt_div.onkeydown = (event) => {
     if (event.key === "Enter" || event.keyCode === 13) {
-      if(txt_div.value != ""){
+      if (txt_div.value != "") {
         askAge();
       }
     }
@@ -63,7 +63,7 @@ function start() {
   btn_submit.type = "button";
   btn_submit.innerHTML = "Next";
   btn_submit.addEventListener("click", () => {
-    if(txt_div.value != ""){
+    if (txt_div.value != "") {
       askAge();
     }
   });
@@ -506,12 +506,18 @@ function askEducation() {
     txt_div.onkeydown = (event) => {
       if (event.key === "Enter" || event.keyCode === 13) {
         edu = txt_div.value;
-        if(edu != ""){
-          if (edu == "Before O/L" || edu == "O/L") {
+        if (edu != "") {
+          if (age < 18 && (edu == "Before O/L" || edu == "O/L")) {
             icm();
             sendSMS(
               contact,
               "Thank you for your inquiry.We will contact you soon.For more info please call or WhatsApp on 0705805805" //115
+            );
+          } else if (age > 18 && edu == "Before O/L") {
+            disqualified();
+            sendSMS(
+              contact,
+              "Thank you for your inquiry. For more info, please call or WhatsApp on 0705805805" //115
             );
           } else {
             askEmployability();
@@ -535,20 +541,22 @@ function askEducation() {
     btn_submit.innerHTML = "Next";
     btn_submit.addEventListener("click", () => {
       edu = txt_div.value;
-      if(edu != ""){
-        if (edu == "Before O/L" || edu == "O/L") {
+      if (edu != "") {
+        if (age < 18 && (edu == "Before O/L" || edu == "O/L")) {
           icm();
           sendSMS(
             contact,
             "Thank you for your inquiry.We will contact you soon.For more info please call or WhatsApp on 0705805805" //115
           );
+        } else if (age > 18 && edu == "Before O/L") {
+          disqualified();
+          sendSMS(
+            contact,
+            "Thank you for your inquiry. For more info, please call or WhatsApp on 0705805805" //115
+          );
         } else {
           askEmployability();
         }
-        // sendSMS(
-        //   "94712272272",
-        //   "Name : " + userName + "\nContact : " + contact + "\nAge : " +age+"\nEducation : "+txt_div.value
-        // );
       }
     });
 
