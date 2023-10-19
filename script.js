@@ -8,7 +8,8 @@ var contact = "";
 var edu = "";
 var isEmp = "No";
 var isIt = "";
-var msg = "Hi there! Welcome to iCET Institute. I'm Teci, your digital assistant. Can I please know your name?";
+var msg =
+  "Hi there! Welcome to iCET Institute. I'm Teci, your digital assistant. Can I please know your name?";
 
 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive);
 function start() {
@@ -17,57 +18,78 @@ function start() {
   toastBootstrap.show();
   msg =
     "Hi there! Welcome to iCET Institute. I'm Teci, your digital assistant. Can I please know your name?";
-    const toast_body = document.getElementById("toast-body");
-    toast_body.innerHTML = "";
+  const toast_body = document.getElementById("toast-body");
+  toast_body.innerHTML = "";
 
-    //create the msg div element
-    const grt = document.createElement("div");
-    grt.className = "msg";
-    grt.id = "msg";
+  const avtr_div = document.createElement("div");
+  avtr_div.className = "avtr_div";
+  const avtr = document.createElement("img");
+  avtr.className = "avtr";
+  avtr.src = "./img/teci.png";
+  avtr_div.appendChild(avtr);
 
-    toast_body.appendChild(grt);
+  //create the msg div element
+  const grt = document.createElement("div");
+  grt.className = "msg";
+  grt.id = "msg";
 
-    //create the input text field element
-    const txt_div = document.createElement("input");
-    txt_div.className = "form-control";
-    txt_div.id = "txtName";
-    txt_div.type = "text";
-    txt_div.placeholder = "Please enter your name";
+  avtr_div.appendChild(grt);
+  toast_body.appendChild(avtr_div);
 
-    //create input text field elemnt holder div
-    const txt_div_holder = document.createElement("div");
-    txt_div_holder.className = "d-flex justify-content-end";
-    txt_div_holder.appendChild(txt_div);
+  //create the input text field element
+  const txt_div = document.createElement("input");
+  txt_div.className = "form-control";
+  txt_div.id = "txtName";
+  txt_div.type = "text";
+  txt_div.required = true;
+  txt_div.onkeydown = (event) => {
+    if (event.key === "Enter" || event.keyCode === 13) {
+      if(txt_div.value != ""){
+        askAge();
+      }
+    }
+  };
+  txt_div.focus();
+  txt_div.placeholder = "Please enter your name";
 
-    //create submit button element
-    const btn_submit = document.createElement("button");
-    btn_submit.className = "btn btn-outline-primary";
-    btn_submit.type = "button";
-    btn_submit.innerHTML = "Next";
-    btn_submit.addEventListener("click", () => {
+  //create input text field elemnt holder div
+  const txt_div_holder = document.createElement("div");
+  txt_div_holder.className = "d-flex justify-content-end";
+  txt_div_holder.appendChild(txt_div);
+
+  //create submit button element
+  const btn_submit = document.createElement("button");
+  btn_submit.className = "btn btn-outline-primary";
+  btn_submit.type = "button";
+  btn_submit.innerHTML = "Next";
+  btn_submit.addEventListener("click", () => {
+    if(txt_div.value != ""){
       askAge();
-    });
+    }
+  });
 
-    //create submit button holder div element
-    const btn_submit_holder = document.createElement("div");
-    btn_submit_holder.className = "d-flex justify-content-end btn-submit";
-    btn_submit_holder.appendChild(btn_submit);
+  //create submit button holder div element
+  const btn_submit_holder = document.createElement("div");
+  btn_submit_holder.className = "d-flex justify-content-end btn-submit";
+  btn_submit_holder.appendChild(btn_submit);
 
-    //create the input elements wrapper div
-    const input_div = document.createElement("div");
-    input_div.appendChild(txt_div_holder);
-    input_div.appendChild(btn_submit_holder);
+  //create the input elements wrapper div
+  const input_div = document.createElement("div");
+  input_div.appendChild(txt_div_holder);
+  input_div.appendChild(btn_submit_holder);
 
-    toast_body.appendChild(input_div);
+  toast_body.appendChild(input_div);
 
-    //create the empty tips div element
-    const tips = document.createElement("div");
-    tips.className = "mt-2 pt-2 border-top tips";
-    tips.id = "tips";
+  //create the empty tips div element
+  const tips = document.createElement("div");
+  tips.className = "mt-2 pt-2 border-top tips";
+  tips.id = "tips";
 
-    toast_body.appendChild(tips);
+  toast_body.appendChild(tips);
 
-    writer();
+  txt_div.focus();
+
+  writer();
 }
 
 //writting effect
@@ -232,18 +254,41 @@ function askAge() {
     const toast_body = document.getElementById("toast-body");
     toast_body.innerHTML = "";
 
+    const avtr_div = document.createElement("div");
+    avtr_div.className = "avtr_div";
+    const avtr = document.createElement("img");
+    avtr.className = "avtr";
+    avtr.src = "./img/teci.png";
+    avtr_div.appendChild(avtr);
+
     //create the msg div element
     const grt = document.createElement("div");
     grt.className = "msg";
     grt.id = "msg";
 
-    toast_body.appendChild(grt);
+    avtr_div.appendChild(grt);
+    toast_body.appendChild(avtr_div);
 
     //create the input text field element
     const txt_div = document.createElement("input");
     txt_div.className = "form-control";
     txt_div.id = "txtAge";
     txt_div.type = "text";
+    txt_div.required = true; // Mark the field as required
+
+    // Add the pattern attribute for age validation
+    txt_div.pattern = "^(0?[1-9]|[1-9][0-9])$"; // This pattern allows ages from 1 to 99
+
+    txt_div.onkeydown = (event) => {
+      if (event.key === "Enter" || event.keyCode === 13) {
+        age = document.getElementById("txtAge").value;
+        if (age > 0 && age < 100) {
+          askContact();
+        } else {
+          txt_div.value = "";
+        }
+      }
+    };
     txt_div.placeholder = "Please enter your age";
 
     //create input text field elemnt holder div
@@ -258,80 +303,10 @@ function askAge() {
     btn_submit.innerHTML = "Next";
     btn_submit.addEventListener("click", () => {
       age = document.getElementById("txtAge").value;
-      askContact();
-    });
-
-    //create submit button holder div element
-    const btn_submit_holder = document.createElement("div");
-    btn_submit_holder.className = "d-flex justify-content-end btn-submit";
-    btn_submit_holder.appendChild(btn_submit);
-
-    //create the input elements wrapper div
-    const input_div = document.createElement("div");
-    input_div.appendChild(txt_div_holder);
-    input_div.appendChild(btn_submit_holder);
-
-    toast_body.appendChild(input_div);
-
-    //create the empty tips div element
-    const tips = document.createElement("div");
-    tips.className = "mt-2 pt-2 border-top tips";
-    tips.id = "tips";
-
-    toast_body.appendChild(tips);
-
-    writer();
-  }
-}
-
-function askContact() {
-  // Get the user's input from the input field
-  i = 0;
-  if (age != "") {
-    // You can use userName as needed (e.g., display it in another toast)
-    console.log("Age : " + age);
-
-    msg = "What is your contact number (Whatsapp) ?";
-    const toast_body = document.getElementById("toast-body");
-    toast_body.innerHTML = "";
-
-    //create the msg div element
-    const grt = document.createElement("div");
-    grt.className = "msg";
-    grt.id = "msg";
-
-    toast_body.appendChild(grt);
-
-    //create the input text field element
-    const txt_div = document.createElement("input");
-    txt_div.className = "form-control";
-    txt_div.id = "txtContact";
-    txt_div.type = "text";
-    txt_div.placeholder = "Please enter your contact number";
-
-    //create input text field elemnt holder div
-    const txt_div_holder = document.createElement("div");
-    txt_div_holder.className = "d-flex justify-content-end";
-    txt_div_holder.appendChild(txt_div);
-
-    //create submit button element
-    const btn_submit = document.createElement("button");
-    btn_submit.className = "btn btn-outline-primary";
-    btn_submit.type = "button";
-    btn_submit.innerHTML = "Next";
-    btn_submit.addEventListener("click", () => {
-      contact = txt_div.value;
-      if (contact != "" && age > 14 && age < 36) {
-        askEducation();
-      } else if (contact != "" && age > 11 && age < 15) {
-        console.log("Contact : " + contact);
-        icm();
-        sendSMS(
-          contact,
-          "Thank you for your inquiry.We will contact you soon.For more info please call or WhatsApp on 0705805805" //115
-        );
-      } else if (contact != "") {
-        disqualified();
+      if (age > 0 && age < 100) {
+        askContact();
+      } else {
+        txt_div.value = "";
       }
     });
 
@@ -353,6 +328,121 @@ function askContact() {
     tips.id = "tips";
 
     toast_body.appendChild(tips);
+    txt_div.focus();
+
+    writer();
+  }
+}
+
+function askContact() {
+  // Get the user's input from the input field
+  i = 0;
+  if (age != "") {
+    // You can use userName as needed (e.g., display it in another toast)
+    console.log("Age : " + age);
+
+    msg = "What is your contact number (Whatsapp) ?";
+    const toast_body = document.getElementById("toast-body");
+    toast_body.innerHTML = "";
+
+    const avtr_div = document.createElement("div");
+    avtr_div.className = "avtr_div";
+    const avtr = document.createElement("img");
+    avtr.className = "avtr";
+    avtr.src = "./img/teci.png";
+    avtr_div.appendChild(avtr);
+
+    //create the msg div element
+    const grt = document.createElement("div");
+    grt.className = "msg";
+    grt.id = "msg";
+
+    avtr_div.appendChild(grt);
+    toast_body.appendChild(avtr_div);
+
+    //create the input text field element
+    const txt_div = document.createElement("input");
+    txt_div.className = "form-control";
+    txt_div.id = "txtContact";
+    txt_div.type = "text";
+    txt_div.pattern = "^\\d{10}$";
+
+    txt_div.onkeydown = (event) => {
+      if (event.key === "Enter" || event.keyCode === 13) {
+        if (txt_div.checkValidity()) {
+          contact = txt_div.value;
+          if (contact != "" && age > 14 && age < 36) {
+            askEducation();
+          } else if (contact != "" && age > 11 && age < 15) {
+            console.log("Contact: " + contact);
+            icm();
+            sendSMS(
+              contact,
+              "Thank you for your inquiry. We will contact you soon. For more info, please call or WhatsApp on 0705805805" //115
+            );
+          } else if (contact != "") {
+            disqualified();
+            sendSMS(
+              contact,
+              "Thank you for your inquiry. For more info, please call or WhatsApp on 0705805805" //115
+            );
+          }
+        }
+      }
+    };
+    txt_div.placeholder = "Please enter your contact number";
+
+    //create input text field elemnt holder div
+    const txt_div_holder = document.createElement("div");
+    txt_div_holder.className = "d-flex justify-content-end";
+    txt_div_holder.appendChild(txt_div);
+
+    //create submit button element
+    const btn_submit = document.createElement("button");
+    btn_submit.className = "btn btn-outline-primary";
+    btn_submit.type = "button";
+    btn_submit.innerHTML = "Next";
+    btn_submit.addEventListener("click", () => {
+      if (txt_div.checkValidity()) {
+        contact = txt_div.value;
+        if (contact != "" && age > 14 && age < 36) {
+          askEducation();
+        } else if (contact != "" && age > 11 && age < 15) {
+          console.log("Contact: " + contact);
+          icm();
+          sendSMS(
+            contact,
+            "Thank you for your inquiry. We will contact you soon. For more info, please call or WhatsApp on 0705805805" //115
+          );
+        } else if (contact != "") {
+          disqualified();
+          sendSMS(
+            contact,
+            "Thank you for your inquiry. For more info, please call or WhatsApp on 0705805805" //115
+          );
+        }
+      }
+    });
+
+    //create submit button holder div element
+    const btn_submit_holder = document.createElement("div");
+    btn_submit_holder.className = "d-flex justify-content-end btn-submit";
+    btn_submit_holder.appendChild(btn_submit);
+
+    //create the input elements wrapper div
+    const input_div = document.createElement("div");
+    input_div.appendChild(txt_div_holder);
+    input_div.appendChild(btn_submit_holder);
+
+    toast_body.appendChild(input_div);
+
+    //create the empty tips div element
+    const tips = document.createElement("div");
+    tips.className = "mt-2 pt-2 border-top tips";
+    tips.id = "tips";
+
+    toast_body.appendChild(tips);
+    txt_div.focus();
 
     writer();
   }
@@ -370,12 +460,20 @@ function askEducation() {
     const toast_body = document.getElementById("toast-body");
     toast_body.innerHTML = "";
 
+    const avtr_div = document.createElement("div");
+    avtr_div.className = "avtr_div";
+    const avtr = document.createElement("img");
+    avtr.className = "avtr";
+    avtr.src = "./img/teci.png";
+    avtr_div.appendChild(avtr);
+
     //create the msg div element
     const grt = document.createElement("div");
     grt.className = "msg";
     grt.id = "msg";
 
-    toast_body.appendChild(grt);
+    avtr_div.appendChild(grt);
+    toast_body.appendChild(avtr_div);
 
     //create data list
     const list = [
@@ -405,6 +503,22 @@ function askEducation() {
     txt_div.className = "form-control";
     txt_div.id = "txtEdu";
     txt_div.type = "text";
+    txt_div.onkeydown = (event) => {
+      if (event.key === "Enter" || event.keyCode === 13) {
+        edu = txt_div.value;
+        if(edu != ""){
+          if (edu == "Before O/L" || edu == "O/L") {
+            icm();
+            sendSMS(
+              contact,
+              "Thank you for your inquiry.We will contact you soon.For more info please call or WhatsApp on 0705805805" //115
+            );
+          } else {
+            askEmployability();
+          }
+        }
+      }
+    };
     txt_div.setAttribute("list", "browsers");
     txt_div.placeholder = "Please enter your qualification";
 
@@ -421,11 +535,21 @@ function askEducation() {
     btn_submit.innerHTML = "Next";
     btn_submit.addEventListener("click", () => {
       edu = txt_div.value;
-      askEmployability();
-      // sendSMS(
-      //   "94712272272",
-      //   "Name : " + userName + "\nContact : " + contact + "\nAge : " +age+"\nEducation : "+txt_div.value
-      // );
+      if(edu != ""){
+        if (edu == "Before O/L" || edu == "O/L") {
+          icm();
+          sendSMS(
+            contact,
+            "Thank you for your inquiry.We will contact you soon.For more info please call or WhatsApp on 0705805805" //115
+          );
+        } else {
+          askEmployability();
+        }
+        // sendSMS(
+        //   "94712272272",
+        //   "Name : " + userName + "\nContact : " + contact + "\nAge : " +age+"\nEducation : "+txt_div.value
+        // );
+      }
     });
 
     //create submit button holder div element
@@ -446,6 +570,7 @@ function askEducation() {
     tips.id = "tips";
 
     toast_body.appendChild(tips);
+    txt_div.focus();
 
     writer();
   }
@@ -459,12 +584,20 @@ function askEmployability() {
   const toast_body = document.getElementById("toast-body");
   toast_body.innerHTML = "";
 
+  const avtr_div = document.createElement("div");
+  avtr_div.className = "avtr_div";
+  const avtr = document.createElement("img");
+  avtr.className = "avtr";
+  avtr.src = "./img/teci.png";
+  avtr_div.appendChild(avtr);
+
   //create the msg div element
   const grt = document.createElement("div");
   grt.className = "msg";
   grt.id = "msg";
 
-  toast_body.appendChild(grt);
+  avtr_div.appendChild(grt);
+  toast_body.appendChild(avtr_div);
 
   //create submit button element
   const btn_yes = document.createElement("button");
@@ -472,7 +605,7 @@ function askEmployability() {
   btn_yes.type = "button";
   btn_yes.innerHTML = "Yes";
   btn_yes.addEventListener("click", () => {
-    console.log("Employability : Yes");
+    // console.log("Employability : Yes");
     isEmp = "Yes";
     askITRelated();
   });
@@ -517,12 +650,20 @@ function askITRelated() {
   const toast_body = document.getElementById("toast-body");
   toast_body.innerHTML = "";
 
+  const avtr_div = document.createElement("div");
+  avtr_div.className = "avtr_div";
+  const avtr = document.createElement("img");
+  avtr.className = "avtr";
+  avtr.src = "./img/teci.png";
+  avtr_div.appendChild(avtr);
+
   //create the msg div element
   const grt = document.createElement("div");
   grt.className = "msg";
   grt.id = "msg";
 
-  toast_body.appendChild(grt);
+  avtr_div.appendChild(grt);
+  toast_body.appendChild(avtr_div);
 
   //create submit button element
   const btn_yes = document.createElement("button");
@@ -568,14 +709,71 @@ function askITRelated() {
 }
 
 function courses() {
+  console.log("Employability : " + isEmp);
   console.log("IT Related : " + isIt);
   // console.log("courses");
-  if (contact != "") {
-    sendSMS(
-      contact,
-      "Thank you for your inquiry.We will contact you soon.For more info please call or WhatsApp on 0705805805" //115
-    );
-  }
+
+  // Get the user's input from the input field
+  i = 0;
+  // You can use userName as needed (e.g., display it in another toast)
+
+  msg =
+    "Congratulations! You are eligible for one of our training programs.Our student Coordinator will contact you soon.";
+  const toast_body = document.getElementById("toast-body");
+  toast_body.innerHTML = "";
+
+  const avtr_div = document.createElement("div");
+  avtr_div.className = "avtr_div";
+  const avtr = document.createElement("img");
+  avtr.className = "avtr";
+  avtr.src = "./img/teci.png";
+  avtr_div.appendChild(avtr);
+
+  //create the msg div element
+  const grt = document.createElement("div");
+  grt.className = "msg";
+  grt.id = "msg";
+
+  avtr_div.appendChild(grt);
+  toast_body.appendChild(avtr_div);
+
+  //create submit button element
+  const btn_submit = document.createElement("button");
+  btn_submit.className = "btn btn-outline-primary";
+  btn_submit.type = "button";
+  btn_submit.innerHTML = "Contact";
+  btn_submit.setAttribute("data-bs-toggle", "modal");
+  btn_submit.setAttribute("data-bs-target", "#staticBackdrop");
+  btn_submit.addEventListener("click", () => {
+    console.log("call or whatsApp");
+    if (contact != "") {
+      sendSMS(
+        contact,
+        "Thank you for your inquiry.We will contact you soon.For more info please call or WhatsApp on 0705805805" //115
+      );
+    }
+  });
+
+  //create submit button holder div element
+  const btn_submit_holder = document.createElement("div");
+  btn_submit_holder.className = "d-flex justify-content-end btn-submit";
+  btn_submit_holder.appendChild(btn_submit);
+
+  //create the input elements wrapper div
+  const input_div = document.createElement("div");
+  input_div.appendChild(btn_submit_holder);
+
+  toast_body.appendChild(input_div);
+
+  //create the empty tips div element
+  const tips = document.createElement("div");
+  tips.className = "mt-2 pt-2 border-top tips";
+  tips.id = "tips";
+  tips.innerHTML = "terms and conditions apply";
+
+  toast_body.appendChild(tips);
+
+  writer();
 }
 
 function icm() {
@@ -588,18 +786,28 @@ function icm() {
   const toast_body = document.getElementById("toast-body");
   toast_body.innerHTML = "";
 
+  const avtr_div = document.createElement("div");
+  avtr_div.className = "avtr_div";
+  const avtr = document.createElement("img");
+  avtr.className = "avtr";
+  avtr.src = "./img/teci.png";
+  avtr_div.appendChild(avtr);
+
   //create the msg div element
   const grt = document.createElement("div");
   grt.className = "msg";
   grt.id = "msg";
 
-  toast_body.appendChild(grt);
+  avtr_div.appendChild(grt);
+  toast_body.appendChild(avtr_div);
 
   //create submit button element
   const btn_submit = document.createElement("button");
   btn_submit.className = "btn btn-outline-primary";
   btn_submit.type = "button";
   btn_submit.innerHTML = "Contact";
+  btn_submit.setAttribute("data-bs-toggle", "modal");
+  btn_submit.setAttribute("data-bs-target", "#staticBackdrop");
   btn_submit.addEventListener("click", () => {
     console.log("call or whatsApp");
   });
@@ -636,18 +844,28 @@ function disqualified() {
   const toast_body = document.getElementById("toast-body");
   toast_body.innerHTML = "";
 
+  const avtr_div = document.createElement("div");
+  avtr_div.className = "avtr_div";
+  const avtr = document.createElement("img");
+  avtr.className = "avtr";
+  avtr.src = "./img/teci.png";
+  avtr_div.appendChild(avtr);
+
   //create the msg div element
   const grt = document.createElement("div");
   grt.className = "msg";
   grt.id = "msg";
 
-  toast_body.appendChild(grt);
+  avtr_div.appendChild(grt);
+  toast_body.appendChild(avtr_div);
 
   //create submit button element
   const btn_submit = document.createElement("button");
   btn_submit.className = "btn btn-outline-primary";
   btn_submit.type = "button";
   btn_submit.innerHTML = "Contact";
+  btn_submit.setAttribute("data-bs-toggle", "modal");
+  btn_submit.setAttribute("data-bs-target", "#staticBackdrop");
   btn_submit.addEventListener("click", () => {
     console.log("call or whatsApp");
   });
@@ -673,6 +891,8 @@ function disqualified() {
 
   writer();
 }
+
+function contacts() {}
 
 //set faid-in active of starting options
 // function setActiveMainTips() {

@@ -12,13 +12,46 @@
 
 <body>
     <button type="button" name="sms" class="btn btn-primary" id="liveToastBtn" onclick="start()">ask iCET</button>
+    <button type="button" name="sms" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop">contact</button>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="background: darkslategrey;">
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: aliceblue;">Contact Us</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"
+                    style="display: flex; justify-content: center; align-items: center; color: aliceblue;">
+                    <a class="dropdown-item" target="_blank" href="tel:+94705805805"
+                        style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="./img/call.png" alt="call" width="60" />
+                        <span>Call</span>
+                    </a>
+                    <a class="dropdown-item" target="_blank" href="https://wa.me/94705805805"
+                        style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="./img/wtsp.png" alt="whatsapp" width="60" />
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+                <!-- <div class="modal-footer" style="font-size: x-small; display: flex; justify-content: center; align-items: center;">
+                    Copyright © 2023 iCET
+                </div> -->
+            </div>
+        </div>
+    </div>
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+            data-bs-autohide="false">
             <div class="toast-header">
                 <img src="/img/logo.ico" class="rounded me-2 icet-img" alt="iCET">
                 <strong class="me-auto">iCET Help</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" onclick="reload()"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"
+                    onclick="reload()"></button>
             </div>
             <div id="toast-body" class="toast-body">
                 <!-- <div id="msg" class="msg">
@@ -35,7 +68,7 @@
                     
                 </div> -->
             </div>
-            
+
         </div>
     </div>
 

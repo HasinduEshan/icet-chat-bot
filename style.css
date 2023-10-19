@@ -20,10 +20,25 @@
 
 .msg{
     margin-bottom: 5px;
+    font-weight: 500;
 }
 
 .btn-submit{
     margin-top: 5px !important;
     /* padding-top: 0px !important; */
 }
+.avtr_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.avtr{
+    width: 80px;
+    height: 80px;
+    border-radius: 60%;
+}
 
+.transparent-modal .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* You can adjust the alpha value (0.5) for the desired level of transparency */
+}
